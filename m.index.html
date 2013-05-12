@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Test mobile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">
+	<meta name="msapplication-tap-highlight" content="no" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/mobile.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	<script src='js/jquery-ui-1.10.2.custom.min.js'></script>
+</head>
+
+<body>
+<!-- Page d'authentification -->
+<section data-role="page" id="connexion" data-theme="a">
+	<header data-role="header" data-position="fixed"><h1>Connexion</h1></header>
+
+	<div data-role="content">
+		<label for="idUser">Identifiant :</label>
+		<input type="text" id="idUser" value="UBBY6502" name="idUser" data-clear-btn="true" data-theme="c"/>
+
+		<br/><label for="pwdUser">Mot de passe :</label>
+		<input type="password" id="pwdUser" value="azerty"  name="pwdUser" data-clear-btn="true" data-theme="c"/>
+
+		<br/><br/>
+		<a href="#" id="cmdConnect" data-role="button"><label>Se connecter</label></a>
+
+		<a href="#mesInterventions" id="link_mesInterventions" data-prefetch="true" style="display:none;">Mes Interventions</a>
+	</div>
+	<script type="text/javascript" src="scriptMobile_connect.js">
+	</script>
+	<footer data-position="fixed" data-role="footer">
+        <h1>Mobile intervention</h1>
+    </footer>
+</section>
+
+
+<section data-role="page" id="mesInterventions" data-theme="a">
+	<header data-position="fixed" data-role="header">
+		<h1 id="head_mesInterventions">Mes Interventions</h1>
+		<a href="m.index.html"  data-iconpos="notext" data-icon="home" rel="external" data-theme="c"></a>
+	</header>
+	<div data-role="content">
+		<ul id="list_mesInterventions" data-role="listview" data-inset="true" data-divider-icon="home" data-theme="a" data-divider-theme="c">
+		</ul>
+		<div id="info"></div>
+	</div>
+	<script type="text/javascript" src="scriptMobile_getMesInterventions.js"></script>
+	<footer data-position="fixed" data-role="footer">
+		<a href="m.index.html"data-prefetch="true" id="link_connect" style="display:none;">Connexion</a>
+		<h1 id="foot_mesInterventions"></h1>
+	</footer>
+</section>
+
+<section data-role="page" id="monIntervention" data-theme="a">
+	<header data-role="header" data-position="fixed"><h1 id="header_monIntervention"></h1></header>
+	<div data-role="content">
+		<table border="1" style="width:100%">
+			<tr>
+				<td>Priorit&eacute; :</td>
+				<td style="text-align:right;">Haute</td>
+			</tr>
+		</table>
+	</div>
+	<footer data-role="footer" data-position="fixed"><h1 id="footer_monIntervention"></h1></footer>
+</section>
+</body>
+</html>

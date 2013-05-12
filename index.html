@@ -1,0 +1,288 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>Consultation d'intervention</title>
+
+<link rel="stylesheet" type="text/css" href="style/onglet.css">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<link rel="stylesheet" type="text/css" href="style/tableSorter.css">
+<link rel="stylesheet" href="style/jquery.ui.css" />
+
+<script type="text/javascript" src="Bibliotheque/jquery-1.9.1.js"></script>
+<script src="Bibliotheque/jquery-ui-1.10.1.custom.js"></script>
+
+<script type="text/javascript" src="js/function_inter.js"></script>
+<script type="text/javascript" src="consult_load.js"></script>
+
+<script type="text/javascript" src="Bibliotheque/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="Bibliotheque/overlib.js"></script>
+
+
+
+
+</head>
+<body>
+<center>
+<div id="centre">
+<!-- Bandeau orange haut de page -->
+<div id="div_orange">
+  <table>
+    <tr >
+      <td> Module de consultation d'intervention Optimise </td >
+        <td class="right"><div style="font-family:Trebuchet MS;font-weight:bold;" id="userConnect"></div><a id="deconnect" href="#" style="color:white;">Se déconnecter</a></td>
+    </tr >
+  </table>
+</div>
+<br/>
+<!--Bandeau de recherche par numÃ©ro-->
+<div id="div_numero">
+  <table id="numero" class="cadreOrange">
+    <form action="javascript:void();" name="form_numero" id="form_numero">
+      <tr>
+        <td style="width:10px;">&nbsp;</td>
+        <td style="width:95px"><img src="img/direc.png" alt="" /> 
+    		<label>Par numéro</label></td>
+        <td style="width=15px;"><a class="infoBulle" id="infoNum" href="#"></a></td>
+        <td><input class="center" maxlength="15" TYPE="text" size="15" name="num_intervention" id="num_intervention" /></td>
+
+        <td style="width:83px;" class="right"><span id="type_tic">
+          <a href="#" id="search_numero"> <label>Rechercher</label></a> </span> &nbsp; </td>
+      </tr>
+    </form>
+  </table>
+</div>
+<br>
+<!--Bandeau de recherche pour le RTSP-->
+<div id="div_rtsp">
+  <table id="rtsp" class="cadreOrange" border="0">
+    <form id="form_rtsp" name="form_rtsp">
+      <tr style="height:70px;">
+        <td style="width:10px;">&nbsp;</td>
+        <td style="width:53px;">
+          <img src="img/direc.png"/><label>&nbsp;RTSP</label>
+        </td>
+        <td colspan="2" style="width:362px;"><a class="infoBulle" id="infoRtsp" href="#"></a></td>
+        <td>
+		      <label>OT</label>
+          <input type="checkbox" class="chkType_rtsp" value="OT" id="ot_rtsp" name="types_rtsp[]" checked="checked" />
+        </td>
+        <td>
+      		<label>INC</label>
+           <input type="checkbox" class="chkType_rtsp" value="IN" id="inc_rtsp" name="types_rtsp[]" checked="checked" />
+        </td>
+         <td>
+      		<label for="wo_rtsp">WO</label>
+          <input type="checkbox" class="chkType_rtsp" value="WO" id="wo_rtsp" name="types_rtsp[]" checked="checked" />
+          </td>
+        <td colspan="2" style="width:425px;">&nbsp;</td>
+      </tr>
+
+      <tr style="height:20px;">
+        <td colspan="3" style="width:80px;">&nbsp;&nbsp;
+          <input id="chkMulti_rtsp" class="label_rtsp" name="chkMulti_rtsp" type="checkbox"/>
+          <label id="multi_rtsp" class="label_rtsp">Multi-sélection</label></td>
+        <td class="right" colspan="3" style="border-right:1px #FF6600 solid;width350px;"><label class="label_rtsp">
+          DI :&nbsp;</label>
+          <select size="1" name="di_rtsp" id="di_rtsp" class="di">
+          </select>&nbsp;&nbsp;&nbsp;</td>
+        <td colspan="2" class="left" style="width:400px;"><label class="label_rtsp">
+		&nbsp;&nbsp; Agence(s) : &nbsp;</label>
+          <select size="1" name="agence_rtsp" id="agence_rtsp" class="agence">
+          </select></td>
+        <td style="width:70px;">&nbsp;</td>
+      </tr>
+       <tr>
+        <td colspan="9">        
+            <table border="0"  style="width:100%;border-spacing:40px">
+                <tr id="priorite_rtsp" >
+                  
+                </tr>
+             </table>
+         </td>
+      </tr>
+      <tr>
+        <td colspan="9" class="right" ><a id="search_rtsp" href="#"> 
+		<label>Rechercher</label></a> &nbsp;</td>
+      </tr> 
+    </form>
+  </table>
+</div>
+
+<br/>
+
+<div id="dialog" title="Basic dialog" style="display:none;">
+</div>
+
+<!--Boutons test-->
+<a name="jah!" id="lien23">TEST</a>&nbsp;&nbsp;<a id="lienPoub"><img src="img/poub.png"></a> <br />
+<br />
+
+<div style="width:100%;" id="div_resultat" class="simple-tabs">
+  <ul>
+    <li><a href="#onglet_recap" id="recap" title="">RÉCAPITULATIF</a></li>
+    <li><a href="#onglet_fait" id="fait" title="">FAIT</a></li>
+    <li><a href="#onglet_nonfait" title="">NON FAIT</a></li>
+    <li><a href="#onglet_ordonnance" title="">ORDONNANCÉ</a></li>
+  </ul>
+  <div id="onglet_fait" class="tab-panel"> </div>
+  <div id="onglet_nonfait" class="tab-panel"> </div>
+  <div id="onglet_ordonnance" class="tab-panel"> </div>
+  <div id="onglet_recap" class="tab-panel">
+    <div id="div_recap_ot">
+      <h2>OT</h2>
+      <table id="recap_ot" class="tablesorter">
+        <thead>
+          <tr>
+            <TH>ETAT</TH>
+            <th>P1</th>
+            <th>P2</th>
+            <th>P3</th>
+            <th>P4</th>
+            <th>TOTAL</th>
+            <th>(FAIT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="odd">
+            <td>VALIDÉ</td>
+            <td id="ot_rea_p1_fait"></td>
+            <td id="ot_rea_p2_fait"></td>
+            <td id="ot_rea_p3_fait"></td>
+            <td id="ot_rea_p4_fait"></td>
+            <td id="ot_rea_tot_fait"></td>
+            <td id="ot_rea_fait">Oui</td>
+          </tr>
+          <tr>
+            <td>VALIDÉ</td>
+            <td id="ot_rea_p1_nfait"></td>
+            <td id="ot_rea_p2_nfait"></td>
+            <td id="ot_rea_p3_nfait"></td>
+            <td id="ot_rea_p4_nfait"></td>
+            <td id="ot_rea_tot_nfait"></td>
+            <td id="ot_rea_nfait">Non</td>
+          </tr>
+          <tr class="odd">
+            <td>ORDONNANCÉ</td>
+            <td id="ot_ord_p1"></td>
+            <td id="ot_ord_p2"></td>
+            <td id="ot_ord_p3"></td>
+            <td id="ot_ord_p4"></td>
+            <td id="ot_ord_tot"></td>
+            <td id="ot_ord_fait">Non</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="div_recap_wo">
+      <h2>WO</h2>
+      <table id="recap_wo" class="tablesorter">
+        <thead>
+          <tr>
+            <TH>ETAT</TH>
+            <th>P1</th>
+            <th>P2</th>
+            <th>P3</th>
+            <th>P4</th>
+            <th>TOTAL</th>
+            <th>(FAIT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="odd">
+            <td>VALIDÉ</td>
+            <td id="wo_rea_p1_fait"></td>
+            <td id="wo_rea_p2_fait"></td>
+            <td id="wo_rea_p3_fait"></td>
+            <td id="wo_rea_p4_fait"></td>
+            <td id="wo_rea_tot_fait"></td>
+            <td id="wo_rea_fait">Oui</td>
+          </tr>
+          <tr>
+            <td>VALIDÉ</td>
+            <td id="wo_rea_p1_nfait"></td>
+            <td id="wo_rea_p2_nfait"></td>
+            <td id="wo_rea_p3_nfait"></td>
+            <td id="wo_rea_p4_nfait"></td>
+            <td id="wo_rea_tot_nfait"></td>
+            <td id="wo_rea_nfait">Non</td>
+          </tr>
+          <tr class="odd">
+            <td>ORDONNANCÉ</td>
+            <td id="wo_ord_p1"></td>
+            <td id="wo_ord_p2"></td>
+            <td id="wo_ord_p3"></td>
+            <td id="wo_ord_p4"></td>
+            <td id="wo_ord_tot"></td>
+            <td id="wo_ord_fait">Non</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="div_recap_inc">
+      <h2>INC</h2>
+      <table id="recap_inc" class="tablesorter">
+        <thead>
+          <tr>
+            <TH>ETAT</TH>
+            <th>P1</th>
+            <th>P2</th>
+            <th>P3</th>
+            <th>P4</th>
+            <th>TOTAL</th>
+            <th>(FAIT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="odd">
+            <td>VALIDÉ</td>
+            <td id="inc_rea_p1_fait"></td>
+            <td id="inc_rea_p2_fait"></td>
+            <td id="inc_rea_p3_fait"></td>
+            <td id="inc_rea_p4_fait"></td>
+            <td id="inc_rea_tot_fait"></td>
+            <td id="inc_rea_fait">Oui</td>
+          </tr>
+          <tr>
+            <td>VALIDÉ</td>
+            <td id="inc_rea_p1_nfait"></td>
+            <td id="inc_rea_p2_nfait"></td>
+            <td id="inc_rea_p3_nfait"></td>
+            <td id="inc_rea_p4_nfait"></td>
+            <td id="inc_rea_tot_nfait"></td>
+            <td id="inc_rea_nfait">Non</td>
+          </tr>
+          <tr class="odd">
+            <td>ORDONNANCÉ</td>
+            <td id="inc_ord_p1"></td>
+            <td id="inc_ord_p2"></td>
+            <td id="inc_ord_p3"></td>
+            <td id="inc_ord_p4"></td>
+            <td id="inc_ord_tot"></td>
+            <td id="inc_ord_fait">Non</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br />
+<div id="info"></div>
+<div id="div_resultat_numero"></div>
+
+</div>
+</center>
+<fieldset id="connexion">
+<legend style="font-weight:bold;font-family:Trebuchet MS">&nbsp;Connexion&nbsp;</legend>
+<br/><span style="margin-left:15%;font-family:Trebuchet MS">Identifiant :</span>
+<br/>
+<input type="text" id="idUser" value="ACPO5610" name="idUser" style="width:70%;margin-left:15%;margin-top:5px;border-radius:5px;text-align:center;box-shadow:0 0 6px"/>
+
+<br/><br/><span style="margin-left:15%;font-family:Trebuchet MS">Mot de passe :</span>
+<br/>
+<input type="password" id="pwdUser" value="azerty"  name="pwdUser" style="width:70%;margin-left:15%;margin-top:5px;border-radius:5px;text-align:center;box-shadow:0 0 6px"/>
+<br/><br/><br/>
+<center><input type="button" id="cmdConnect" value="Se connecter" style="border-radius:5px;background:white;border:solid 1px #FF6600;cursor:pointer;box-shadow:0 0 6px;font-family:Trebuchet MS"/></center>
+          </fieldset>
+
+</body>
+</html>
