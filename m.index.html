@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
-	<title>Test mobile test</title>
+	<title>Mobile interventions</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">
 	<meta name="msapplication-tap-highlight" content="no" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
@@ -15,7 +15,9 @@
 <body>
 <!-- Page d'authentification -->
 <section data-role="page" id="connexion" data-theme="a">
-	<header data-role="header" data-position="fixed"><h1>Connexion</h1></header>
+	<header data-role="header" data-position="fixed">
+		<h1>Connexion</h1>
+	</header>
 
 	<div data-role="content">
 		<label for="idUser">Identifiant :</label>
@@ -36,7 +38,7 @@
     </footer>
 </section>
 
-
+<!-- Page d'affichage des interventions -->
 <section data-role="page" id="mesInterventions" data-theme="a">
 	<header data-position="fixed" data-role="header">
 		<h1 id="head_mesInterventions">Mes Interventions</h1>
@@ -54,17 +56,60 @@
 	</footer>
 </section>
 
+<!-- Page affichant les informations de l'intervention -->
 <section data-role="page" id="monIntervention" data-theme="a">
-	<header data-role="header" data-position="fixed"><h1 id="header_monIntervention"></h1></header>
+	<header data-role="header" data-position="fixed">
+		<h1 id="header_monIntervention">Intervention</h1>
+		<a href="m.index.html#mesInterventions"  data-iconpos="notext" data-icon="back" rel="external" data-theme="c"></a>
+		<a href="#" id="cmdParam" data-iconpos="notext" data-icon="gear" rel="external" data-theme="c"></a>
+	</header>
+	<div id="ct" data-role="content">
+		Numero :&nbsp;<span class="infoInter" id="iNumero"></span><br/><br/>
+		Lieu :&nbsp;<span class="infoInter" id="iLieu"></span><br/><br/>
+		Utilisateur :&nbsp;<span class="infoInter" id="iUtilisateur"></span><br/><br/>
+		Priorit&eacute; :&nbsp;<span class="infoInter" id="iPriorite"></span><br/><br/>
+		Heure pr&eacute;vue :&nbsp;<span class="infoInter" id="iHPrevue"></span><br/><br/>
+		Dur&eacute;e pr&eacute;vue :&nbsp;<span class="infoInter" id="iDPrevue"></span><br/><br/><br/>
+
+		<a href="#monIntervention_deroulement" id="link_deroulement" data-prefetch="true" style="display:none;">Deroulement</a>
+	</div>
+	<script type="text/javascript" src="scriptMobile_infoInter.js"></script>
+	<footer data-role="footer" data-position="fixed"><h1 id="foot_monIntervention"></h1></footer>
+</section>
+
+<!-- Page permettant d'entrer des informations sur le déroulement de l'intervention -->
+<section data-role="page" id="monIntervention_deroulement" data-theme="a">
+	<header data-role="header" data-position="fixed">
+		<h1 id="header_monIntervention_deroulement">Intervention</h1>
+		<a href="m.index.html#mesInterventions"  data-iconpos="notext" data-icon="back" rel="external" data-theme="c"></a>
+		<a href="m.index.html#monIntervention"  data-iconpos="notext" data-icon="info" rel="external" data-theme="c"></a>
+	</header>
 	<div data-role="content">
-		<table border="1" style="width:100%">
+		<label for="txtCommentaire">Commentaire :</label>
+		<textarea name="txtCommentaire" id="txtCommentaire" data-theme="c"></textarea>
+		<br/>
+		<label for="txtMotifHD">Motif hors d&eacute;lais :</label>
+		<input type="text" id="txtMotifHD" name="txtMotifHD" data-clear-btn="true" data-theme="c"/>
+		<br/>
+
+		<table>
 			<tr>
-				<td>Priorit&eacute; :</td>
-				<td style="text-align:right;">Haute</td>
+				<td><label>Fait :</label></td>
+				<td style="text-align:center"><fieldset data-role="controlgroup" data-type="horizontal">
+			         	<input type="radio" name="radio-choice" id="radio-choice-1" value="oui" />
+			         	<label for="radio-choice-1">Oui</label>
+
+			         	<input type="radio" name="radio-choice" id="radio-choice-2" value="non" checked="checked"/>
+			         	<label for="radio-choice-2">Non</label>
+			    	</fieldset>
+			    </td>
 			</tr>
 		</table>
+		<br/>
+		<a href="#" data-role="button" id="cmdStartEnd" style="background:red;"><label id="labelSTEN"></label></a>
 	</div>
-	<footer data-role="footer" data-position="fixed"><h1 id="footer_monIntervention"></h1></footer>
+	<footer data-role="footer" data-position="fixed"><h1 id="foot_monIntervention_deroulement"></h1></footer>
 </section>
+
 </body>
 </html>

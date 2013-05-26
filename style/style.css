@@ -9,7 +9,7 @@ a.infobulle {
 	height: 15px;
 }
 
-label {
+label, #monIntervention #ct {
 	font-family: Trebuchet MS;
 	vertical-align: 1px;
 }

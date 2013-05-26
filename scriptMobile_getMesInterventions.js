@@ -35,16 +35,36 @@ $('#mesInterventions').on('pageshow', function () {
     });
 
     $('#list_mesInterventions').on('click', '.lesInters', function() {
-        alert('1:'+$(this).attr('title'));
         $.ajax({
             type:'POST',
             url:'mobile_interventions.php?getMonInter',
             datatype:'html',
             data:{ codeInter:$(this).attr('title') },
 
-            success:function(mesInters)
+            success:function(monInter)
             {
-                alert(mesInters);
+                $('.infoInter').empty();
+                $('#iNumero').append(monInter[0].Code_intervention);
+                $('#iLieu').append(monInter[0].Code_site);
+                $('#iUtilisateur').append(monInter[0].Utilisateur);
+                $('#iPriorite').append(monInter[0].Priorite);
+                $('#iHPrevue').append(monInter[0].Heure_prevue.substr(0,5));
+                $('#iDPrevue').append(monInter[0].Duree_prevue);
+
+                var etat = monInter[0].Id_etat;
+
+                if(etat == 1)
+                {
+                    $('#cmdStartEnd').css('background', 'green');
+                    $('#labelSTEN').empty()
+                    .append('D&eacute;marrer');
+                }
+                else if (etat == 4)
+                {
+                    $('#cmdStartEnd').css('background', 'red');
+                    $('#labelSTEN').empty()
+                    .append('Terminer');
+                }
             },
 
             error:function()

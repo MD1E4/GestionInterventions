@@ -2,10 +2,18 @@
 	text-align: center;
 }
 
-#connexion header, #connexion footer, #mesInterventions header, #mesInterventions footer {
+#connexion header, #connexion footer, #mesInterventions header, #mesInterventions footer, #monIntervention header, #monIntervention footer, #monIntervention_deroulement header, #monIntervention_deroulement footer {
 	background: #ff6600;
 }
 
 #connexion label, #mesInterventions label {
 	text-align: left;
+}
+
+.infoInter {
+	color: #FF6600;
+}
+
+#monIntervention_deroulement table {
+	width: 100%;
 }

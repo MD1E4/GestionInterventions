@@ -51,8 +51,8 @@ $('#connexion').on('pageshow', function () {
                             user = res[index].Prenom+' '+res[index].Nom;
                             smallUser = res[index].Prenom.substr(0,1)+'. '+res[index].Nom;
                             alert('Bienvenue '+user);
-                            $('#foot_mesInterventions').empty();
-                            $('#foot_mesInterventions').append(smallUser);
+                            $('#foot_mesInterventions, #foot_monIntervention, #foot_monIntervention_deroulement').empty();
+                            $('#foot_mesInterventions, #foot_monIntervention, #foot_monIntervention_deroulement').append(smallUser);
                             $('#link_mesInterventions').click();
                         }
                     }
