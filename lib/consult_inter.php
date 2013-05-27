@@ -1,10 +1,10 @@
 <?php
-include_once("lib/dbcnx.php");
+include_once("dbcnx.php");
 
 session_start();
 
 $_SESSION['code_user']="";
-
+// Authentification
 if(isset($_GET['connect']))
 {
 	$idUser = $_POST['idUser'];
@@ -25,6 +25,7 @@ if(isset($_GET['connect']))
 	echo json_encode($res);
 }
 
+// Chargement des agences de niveau 1 (DI)
 if(isset($_GET["loadagence1"]))
 {
 	$req = "SELECT id, nom_agence1
@@ -43,6 +44,7 @@ if(isset($_GET["loadagence1"]))
 	echo json_encode($res);
 }
 
+// Chargement des agences de niveau 2 (Agence)
 if(isset($_GET['loadagence2']))
 {
 	$agence1 = $_POST['di_rtsp'];
@@ -64,6 +66,7 @@ if(isset($_GET['loadagence2']))
 	echo json_encode($res);
 }
 
+//Chargement des priorités
 if(isset($_GET['loadpriorite']))
 {
 	$req = 'SELECT Id, Libelle
@@ -76,54 +79,6 @@ if(isset($_GET['loadpriorite']))
 
 	header('Content-Type: application/json;');
 	echo json_encode($res);
-}
-
-$array = array();
-
-//Charge le cache au chargement si ce dernier n'est pas chargé
-if(isset($_GET['cache']))
-{
-	getAllCache();
-    $array['priorite'] = zend_disk_cache_fetch("PILOTCA::PRIORITES");
-  	$array['bornes'] = zend_disk_cache_fetch("PILOTCA::BORNES");
-  	$array['agence1'] = zend_disk_cache_fetch("PILOTCA::AGENCESN1");
-  	$array['agence2'] = zend_disk_cache_fetch("PILOTCA::AGENCESN2");	
-	header('Content-Type: application/json');
-	echo json_encode($array);
-}
-//Reset le cache
-if(isset($_GET['reset']))
-{
-	$destroyCache = zend_disk_cache_clear("PILOTCA");
-	
-	if($destroyCache)
-	{
-		echo 'CLEAR';
-	}
-	else
-	{
-		echo 'PAS CLEAR';
-	}
-}
-//Renvoit les agences en fonction de la DI sélectionnée
-if(isset($_GET['agence']))
-{	
-	$tabAgences2 = zend_disk_cache_fetch("PILOTCA::AGENCESN2");
-	$result = array();
-	$idFrom =  $_GET['$di'];
-	
-	$di = $_POST[$idFrom];
-	
-	$tabAgences1 = zend_disk_cache_fetch("PILOTCA::AGENCESN1");
-	foreach($tabAgences2 as $i=>$a)
-	{
-		if($a[2] == $tabAgences1[$di-1][1])
-		{
-			$result[] = $a;
-		}
-	}
-	header('Content-Type: application/json');
-	echo json_encode($result);
 }
 
 ?>

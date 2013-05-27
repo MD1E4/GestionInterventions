@@ -1,7 +1,8 @@
+// Evenement au chargement de la page "conneciton"
 $('#connexion').on('pageshow', function () {
-
+    // Lors de l'évenement click sur le bouton d'authentification
     $('#cmdConnect').on('click', function(){
-
+        // Controle d'erreur de la saisie de l'utilisateur
         if ($('#idUser').val() == '' && $('#pwdUser').val() == '') 
         {
             alert('Veuillez saisir votre identifiant et votre mot de passe');
@@ -14,21 +15,27 @@ $('#connexion').on('pageshow', function () {
         {
             alert('Veuillez saisir votre mot de passe');
         }
+        // Si la saisie est bonne
         else
         {
+            // On vérifie si le nom d'utilisateur et le mot de passe entré sont correctes
             $.ajax({
                 type:'POST',
-                url:'consult_inter.php?connect',        
+                url:'lib/consult_inter.php?connect',        
                 datatype:'json',
                 data:{ idUser: $('#idUser').val(), pwdUser: $('#pwdUser').val() },
+                // En cas de succès du tratement php, le résultat est récuperé au format Json
                 success:function(res) 
                 {
+                    // Si la requete ne renvoit rien on informe l'utilisateur
                     if(res=='')
                     {
                         alert('Le nom d\'utilisateur ou le mot de passe n\'est pas valide');
                     }
+                    // Sinon...
                     else
                     {
+                        // ...On vérifie si l'utilisateur est bien habilité à acceder au service
                         var ok = false;
                         var index;
                         for (var i = 0; i < res.length; i++) 
@@ -42,10 +49,12 @@ $('#connexion').on('pageshow', function () {
 
                                         
                         }
+                        // S'il n'est pas habilité à acceder au service on l'en informe
                         if(ok == false)
                         {
                             alert('Vous n\'êtes pas habilité à acceder à l\'outil');
                         }
+                        // Sinon on lui affiche ses interventions
                         else
                         {
                             user = res[index].Prenom+' '+res[index].Nom;
@@ -57,6 +66,7 @@ $('#connexion').on('pageshow', function () {
                         }
                     }
                 },
+                // En cas d'erreur rencontrée dans le fichier php
                 error:function()
                 {
                     alert('Problème de connexion au serveur, veuillez réessayer ultérieurement')

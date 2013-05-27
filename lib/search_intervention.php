@@ -1,6 +1,6 @@
 <?php 
 header('Content-Type: text/html; charset=ISO-8859-1');
-include_once("lib/dbcnx.php");
+include_once("dbcnx.php");
 
 
 //Base de la requete principale

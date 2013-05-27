@@ -29,7 +29,7 @@ $(document).ready(function(){
     	{
 	    	$.ajax({
 	    		type:'POST',
-	    		url:'consult_inter.php?connect',
+	    		url:'lib/consult_inter.php?connect',
 	    		datatype:'json',
 	    		data:$('#connexion').serialize(),
 
@@ -103,7 +103,7 @@ $(document).ready(function(){
 	$('#centre').on('click', '.histo_inter', function(){
 		var numHisto = $(this).text().split('/')[0];
 		$.ajax({
-			url:'search_intervention.php?search_numero&histo='+numHisto,
+			url:'lib/search_intervention.php?search_numero&histo='+numHisto,
 			datatype:'json',
 
 			success:function(res)
@@ -130,18 +130,18 @@ $(document).ready(function(){
 	});
 
 	//Lie de test PHP
-	$('#centre').on('click', '#lien23', function(){
-		/*$("#dialog").dialog({
+	/*$('#centre').on('click', '#lien23', function(){
+		$("#dialog").dialog({
 			height:200,
 			width:400,
 			resizable:false,
 			draggable:false,
 			modal:true
-		});*/
+		});
 		Test2($('#dib').val());
 		$.ajax({
 			type:'POST',
-			url:'search_intervention.php?test',
+			url:'../lib/search_intervention.php?test',
 			datatype:'html',
 			data: $('#form_rtsp').serialize(),
 			
@@ -154,7 +154,7 @@ $(document).ready(function(){
 				Test2('Erreur Du TEST');
 			}
 		});
-	});
+	});*/
 
 	
 	// Remplissage combobox Agences au chargement
@@ -179,7 +179,7 @@ $(document).ready(function(){
 	//Chargement des Checkboxs priorités
 	$.ajax({
 		type:'POST',
-		url:'consult_inter.php?loadpriorite',
+		url:'lib/consult_inter.php?loadpriorite',
 		datatype:'json',
 
 		success:function(res)
@@ -268,7 +268,7 @@ $(document).ready(function(){
 		//On remplit les tableau récapitulatifs
 		$.ajax({
 			type:'POST',
-			url:'search_intervention.php?recap&rtsp',
+			url:'lib/search_intervention.php?recap&rtsp',
 			datatype:'json',
 			data:$('#form_rtsp').serialize(),
 			
@@ -369,7 +369,7 @@ $(document).ready(function(){
 			prio = prio.substr(0, prio.length-1);
 		}
 
-		var txturl = 'search_intervention.php?search_rtsp';
+		var txturl = 'lib/search_intervention.php?search_rtsp';
 		if(prio != '')
 		txturl+='&prio='+prio;
 		
@@ -405,7 +405,7 @@ $(document).ready(function(){
 		{
 			$.ajax({
 				type:'POST',
-				url:'search_intervention.php?search_numero',
+				url:'lib/search_intervention.php?search_numero',
 				datatype:'json',
 				data:$('#form_numero').serialize(),
 				success:function(res)

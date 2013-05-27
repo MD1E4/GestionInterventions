@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<!-- Page d'authentification -->
+<!-- Page 1 : Authentification -->
 <section data-role="page" id="connexion" data-theme="a">
 	<header data-role="header" data-position="fixed">
 		<h1>Connexion</h1>
@@ -28,39 +28,46 @@
 
 		<br/><br/>
 		<a href="#" id="cmdConnect" data-role="button"><label>Se connecter</label></a>
-
+		<!-- Lien caché en direction de la page "mesInterventions" utilisé pour le controle d'erreur-->
 		<a href="#mesInterventions" id="link_mesInterventions" data-prefetch="true" style="display:none;">Mes Interventions</a>
 	</div>
-	<script type="text/javascript" src="scriptMobile_connect.js">
+	<!-- Script Javascript qui contient les évenements de la page "connexion" -->
+	<script type="text/javascript" src="scripts_mobile/scriptMobile_connect.js">
 	</script>
 	<footer data-position="fixed" data-role="footer">
         <h1>Mobile intervention</h1>
     </footer>
 </section>
 
-<!-- Page d'affichage des interventions -->
+<!-- Page 2 : Affichage des interventions-->
 <section data-role="page" id="mesInterventions" data-theme="a">
 	<header data-position="fixed" data-role="header">
 		<h1 id="head_mesInterventions">Mes Interventions</h1>
+		<!-- Bouton qui nous dirige sur la page d'authentification -->
 		<a href="m.index.html"  data-iconpos="notext" data-icon="home" rel="external" data-theme="c"></a>
 	</header>
 	<div data-role="content">
+		<!-- Liste des interventions -->
 		<ul id="list_mesInterventions" data-role="listview" data-inset="true" data-divider-icon="home" data-theme="a" data-divider-theme="c">
 		</ul>
 		<div id="info"></div>
 	</div>
-	<script type="text/javascript" src="scriptMobile_getMesInterventions.js"></script>
+	<!-- Script Javascript qui contient les évenements de la page "mesInterventions" -->
+	<script type="text/javascript" src="scripts_mobile/scriptMobile_getMesInterventions.js"></script>
 	<footer data-position="fixed" data-role="footer">
+		<!-- Lien caché en direction de la page "connexion" utilisé pour le controle d'authentification-->
 		<a href="m.index.html"data-prefetch="true" id="link_connect" style="display:none;">Connexion</a>
 		<h1 id="foot_mesInterventions"></h1>
-	</footer>
+	 </footer>
 </section>
 
-<!-- Page affichant les informations de l'intervention -->
+<!-- Page 3 : Affichage des informations de l'intervention sélectionnée dans la page 2-->
 <section data-role="page" id="monIntervention" data-theme="a">
 	<header data-role="header" data-position="fixed">
-		<h1 id="header_monIntervention">Intervention</h1>
+		<h1 id="header_monIntervention">Informations</h1>
+		<!-- Bouton qui nous dirige sur la page "mesInterventions" -->
 		<a href="m.index.html#mesInterventions"  data-iconpos="notext" data-icon="back" rel="external" data-theme="c"></a>
+		<!-- Bouton qui nous dirige sur la page des paramètres de l'intervention en utilisant le lien caché suivant -->
 		<a href="#" id="cmdParam" data-iconpos="notext" data-icon="gear" rel="external" data-theme="c"></a>
 	</header>
 	<div id="ct" data-role="content">
@@ -70,44 +77,62 @@
 		Priorit&eacute; :&nbsp;<span class="infoInter" id="iPriorite"></span><br/><br/>
 		Heure pr&eacute;vue :&nbsp;<span class="infoInter" id="iHPrevue"></span><br/><br/>
 		Dur&eacute;e pr&eacute;vue :&nbsp;<span class="infoInter" id="iDPrevue"></span><br/><br/><br/>
-
+		<!-- Lien caché qui nous dirige sur la page des paramètres de l'intervention -->
 		<a href="#monIntervention_deroulement" id="link_deroulement" data-prefetch="true" style="display:none;">Deroulement</a>
 	</div>
-	<script type="text/javascript" src="scriptMobile_infoInter.js"></script>
+	<!-- Script Javascript qui contient les évenements de la page "monIntervention" -->
+	<script type="text/javascript" src="scripts_mobile/scriptMobile_infoInter.js"></script>
 	<footer data-role="footer" data-position="fixed"><h1 id="foot_monIntervention"></h1></footer>
 </section>
 
-<!-- Page permettant d'entrer des informations sur le déroulement de l'intervention -->
+<!-- Page 4 : Permet d'entrer des informations sur le déroulement de l'intervention -->
 <section data-role="page" id="monIntervention_deroulement" data-theme="a">
 	<header data-role="header" data-position="fixed">
-		<h1 id="header_monIntervention_deroulement">Intervention</h1>
+		<h1 id="header_monIntervention_deroulement">Param&egrave;tres</h1>
+		<!-- Bouton qui nous dirige sur la page "mesInterventions" -->
 		<a href="m.index.html#mesInterventions"  data-iconpos="notext" data-icon="back" rel="external" data-theme="c"></a>
+		<!-- Bouton qui nous dirige sur la page "monIntervention" -->
 		<a href="m.index.html#monIntervention"  data-iconpos="notext" data-icon="info" rel="external" data-theme="c"></a>
 	</header>
 	<div data-role="content">
-		<label for="txtCommentaire">Commentaire :</label>
-		<textarea name="txtCommentaire" id="txtCommentaire" data-theme="c"></textarea>
-		<br/>
-		<label for="txtMotifHD">Motif hors d&eacute;lais :</label>
-		<input type="text" id="txtMotifHD" name="txtMotifHD" data-clear-btn="true" data-theme="c"/>
-		<br/>
+		<!-- Visible quand l'intervetion est à l'état ordonnancée.
+			Permet de démarrer l'intervention-->
+		<div id="div_start">
+			<a href="#" data-role="button" class="bigBtn" id="cmdStart" style="background:green"><label>D&eacute;marrer</label></a>
+		</div>
+		<!-- Visible quand l'intervention est à l'état en cours
+			Permet d'arreter l'intervention -->
+		<div id="div_end" style="display:none;">
+			<label for="txtCommentaire">Commentaire :</label>
+			<textarea name="txtCommentaire" id="txtCommentaire" data-theme="c"></textarea>
+			<br/>
+			<label for="txtMotifHD">Motif hors d&eacute;lais :</label>
+			<input type="text" id="txtMotifHD" name="txtMotifHD" data-clear-btn="true" data-theme="c"/>
+			<br/>
 
-		<table>
-			<tr>
-				<td><label>Fait :</label></td>
-				<td style="text-align:center"><fieldset data-role="controlgroup" data-type="horizontal">
-			         	<input type="radio" name="radio-choice" id="radio-choice-1" value="oui" />
-			         	<label for="radio-choice-1">Oui</label>
+			<table>
+				<tr>
+					<td><label>Fait :</label></td>
+					<td style="text-align:center">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+				         	<input type="radio" name="radio-choice" id="radioFait" value="Oui" />
+				         	<label for="radioFait">Oui</label>
 
-			         	<input type="radio" name="radio-choice" id="radio-choice-2" value="non" checked="checked"/>
-			         	<label for="radio-choice-2">Non</label>
-			    	</fieldset>
-			    </td>
-			</tr>
-		</table>
-		<br/>
-		<a href="#" data-role="button" id="cmdStartEnd" style="background:red;"><label id="labelSTEN"></label></a>
+				         	<input type="radio" name="radio-choice" id="radioNonFait" value="Non" checked="checked"/>
+				         	<label for="radioNonFait">Non</label>
+				    	</fieldset>
+				    </td>
+				</tr>
+			</table>
+			<br/>
+			<a href="#" data-role="button" id="cmdEnd" style="background:red;"><label>Terminer</label></a>
+		</div>
+		<!-- Lien caché qui nous dirige sur la page "mesInterventions" -->
+		<a href="#mesInterventions" id="link_mesInterventions" data-prefetch="true" style="display:none;">Mes Interventions</a>
 	</div>
+	<!-- Script Javascript qui contient les évenements de la page "connexion" -->
+	<script type="text/javascript" src="scripts_mobile/scriptMobile_paramInter.js">
+	</script>
 	<footer data-role="footer" data-position="fixed"><h1 id="foot_monIntervention_deroulement"></h1></footer>
 </section>
 

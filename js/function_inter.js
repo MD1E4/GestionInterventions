@@ -279,7 +279,7 @@ function RemplirAgence(id1Selected, id2Selected)
 	// Remplissage combobox DI au chargement
 	$.ajax({
 		type:'POST',
-		url:'consult_inter.php?loadagence1',
+		url:'lib/consult_inter.php?loadagence1',
 		datatype:'json',
 
 		success:function(res)
@@ -309,7 +309,7 @@ function RemplirAgence2(idSelected)
 {
 	$.ajax({
 		type:'POST',
-		url:'consult_inter.php?loadagence2',
+		url:'lib/consult_inter.php?loadagence2',
 		datatype:'json',
 		data: $('#di_rtsp').serialize(),
 
